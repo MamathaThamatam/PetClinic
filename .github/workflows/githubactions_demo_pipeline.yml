@@ -6,6 +6,7 @@ on:
 
 env:
   GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
+  SSH_KEY: ${{ secrets.SSH_KEY }}
   WORKSPACE: ${{ github.workspace }}
   REPONAME: ${{ github.event.repository.name }}
 
@@ -28,6 +29,10 @@ jobs:
         run: |
           mvn package -Dmaven.test.skip=true
 
-      # - name: Deployment
-      #   run: |
+      - name: Deployment
+        run: |
+          cd ${WORKSPACE}
+          cat ${{ env.SSH_KEY }} >demo-key.pem
+          scp -i ${WORKSPACE}/demo-key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war root@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
+          nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start
 

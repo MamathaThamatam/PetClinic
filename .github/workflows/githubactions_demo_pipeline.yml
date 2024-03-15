@@ -38,6 +38,6 @@ jobs:
           chmod 600 ssh_key.pem
           mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
-          ssh-keyscan -H 13.201.132.49 >> ~/.ssh/known_hosts
-          scp -i ./ssh_key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war ubuntu@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
-          ssh -i ./ssh_key.pem ubuntu@13.201.132.49 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'
+          ssh-keyscan -H 3.108.215.79 >> ~/.ssh/known_hosts
+          scp -i ./ssh_key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war ubuntu@3.108.215.79:/opt/apache-tomcat-8.5.99/webapps/
+          ssh -i ./ssh_key.pem ubuntu@3.108.215.79 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'

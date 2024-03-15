@@ -1,0 +1,33 @@
+name: GithubDemo
+on:
+  push:
+    branches:
+      - main
+
+env:
+  GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
+  WORKSPACE: ${{ github.workspace }}
+  REPONAME: ${{ github.event.repository.name }}
+
+jobs:
+  Build_Deploy:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+          submodules: 'true'
+          ref: 'master'
+          token: ${{ env.GITHUB_PAT }}
+
+      - name: Build
+        run: |
+          mvn package -Dmaven.test.skip=true
+
+      # - name: Deployment
+      #   run: |
+

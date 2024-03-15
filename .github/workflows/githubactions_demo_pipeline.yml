@@ -33,6 +33,7 @@ jobs:
         run: |
           cd ${WORKSPACE}
           echo ${{ env.SSH_KEY }} >demo-key.pem
+          ls
           scp -i ${WORKSPACE}/demo-key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war root@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
           nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start
 

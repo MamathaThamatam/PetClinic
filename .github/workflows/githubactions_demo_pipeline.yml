@@ -2,7 +2,7 @@ name: GithubDemo
 on:
   push:
     branches:
-      - main
+      - master
 
 env:
   GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}

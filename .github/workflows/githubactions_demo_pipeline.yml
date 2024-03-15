@@ -35,5 +35,5 @@ jobs:
           set -ex
           cd ${WORKSPACE}
           echo "${{ secrets.SSH_KEY }}" > ssh_key.pem
-          scp -i ssh_key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war root@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
-          ssh -i ssh_key.pem root@13.201.132.49 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'
+          scp -i ./ssh_key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war root@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
+          ssh -i ./ssh_key.pem root@13.201.132.49 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'

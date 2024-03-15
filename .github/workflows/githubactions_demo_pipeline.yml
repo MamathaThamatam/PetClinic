@@ -32,7 +32,7 @@ jobs:
 
       - name: Deployment
         run: |
-          set -e
+          set -ex
           cd ${WORKSPACE}
           chmod 600 ${{ env.SSH_PRIVATE_KEY }}
           ssh-keyscan -H 13.201.132.49 >> ~/.ssh/known_hosts

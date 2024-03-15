@@ -6,7 +6,7 @@ on:
 
 env:
   GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
-  SSH_KEY: ${{ secrets.SSH_KEY }}
+  SSH_PRIVATE_KEY: ${{ secrets.SSH_KEY }}
   WORKSPACE: ${{ github.workspace }}
   REPONAME: ${{ github.event.repository.name }}
 
@@ -32,9 +32,7 @@ jobs:
       - name: Deployment
         run: |
           cd ${WORKSPACE}
-          ls
-          echo ${{ env.SSH_KEY }} >demo-key.pem
-          ls
-          scp -i ${WORKSPACE}/demo-key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war root@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
-          nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start
+          scp -i ${{ secrets.SSH_PRIVATE_KEY }} /home/runner/work/PetClinic/PetClinic/target/petclinic.war root@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
+          ssh -i ${{ secrets.SSH_PRIVATE_KEY }} root@13.201.132.49 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'
+          
 

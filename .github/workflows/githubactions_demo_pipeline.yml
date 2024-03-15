@@ -35,5 +35,9 @@ jobs:
           set -ex
           cd ${WORKSPACE}
           echo "${{ secrets.SSH_KEY }}" > ssh_key.pem
+          chmod 600 ssh_key.pem
+          mkdir -p ~/.ssh
+          touch ~/.ssh/known_hosts
+          ssh-keyscan -H 13.201.132.49 >> ~/.ssh/known_hosts
           scp -i ./ssh_key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war root@13.201.132.49:/opt/apache-tomcat-8.5.99/webapps/
           ssh -i ./ssh_key.pem root@13.201.132.49 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'

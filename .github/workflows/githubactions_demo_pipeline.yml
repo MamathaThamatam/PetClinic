@@ -2,7 +2,7 @@ name: GithubDemo
 on:
   push:
     branches:
-      - master1
+      - master
 
 env:
   GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
@@ -38,6 +38,6 @@ jobs:
           chmod 600 ssh_key.pem
           mkdir -p ~/.ssh
           touch ~/.ssh/known_hosts
-          ssh-keyscan -H 3.108.215.79 >> ~/.ssh/known_hosts
-          scp -i ./ssh_key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war ubuntu@3.108.215.79:/opt/apache-tomcat-8.5.99/webapps/
-          ssh -i ./ssh_key.pem ubuntu@3.108.215.79 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'
+          ssh-keyscan -H 43.204.217.242 >> ~/.ssh/known_hosts
+          scp -i ./ssh_key.pem /home/runner/work/PetClinic/PetClinic/target/petclinic.war ubuntu@43.204.217.242:/opt/apache-tomcat-8.5.99/webapps/
+          ssh -i ./ssh_key.pem ubuntu@43.204.217.242 'nohup /opt/apache-tomcat-8.5.99/bin/catalina.sh start'

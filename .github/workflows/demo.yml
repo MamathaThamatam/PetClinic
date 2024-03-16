@@ -1,0 +1,34 @@
+name: Demo-workflow
+
+on:
+  push:
+    branches:
+      - master
+
+env:
+  message: 'Ths is Github actions workshop'
+  GITHUB_PAT: ${{ secrets.MY_GITHUB_PAT }}
+  WORKSPACE: ${{ github.workspace }}
+
+jobs:
+  Demo:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2.3.4
+        with:
+          fetch-depth: 0
+          submodules: "true"
+          ref: "master"
+          token: ${{ env.GITHUB_PAT }}
+
+      - name: list the repo
+        run: |
+          cd ${WORKSPACE}
+          ls
+          pwd
+          echo "**********************************************"
+          ls -ltr
